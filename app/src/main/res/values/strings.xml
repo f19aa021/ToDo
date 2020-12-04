@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">prB_ToDoApp</string>
+    <!--    activity_main-->
+    <string name="view_list_title">リスト一覧</string>
+    <string name="button_addList">リストを作成</string>
+    <string name="button_deleteList">削除</string>
+    <!--    activity_display_add_list-->
+    <string name="eView_listName">リスト名を入力</string>
+    <!--    activity_display_tasks-->
+    <string name="_test_">_仮名_</string>
+    <string name="button_addTask">タスクを追加</string>
+    <!--    activity_display_add_task-->
+    <string name="eView_taskName">タスク名を入力</string>
+    <string name="button_done">完了</string>
+</resources>
