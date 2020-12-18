@@ -7,15 +7,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
     public static boolean deleteListFlg;
-    public static HashMap<Button, ArrayList> lists = new HashMap<>();
+    public ArrayList<Button> lists = new ArrayList<>();
     public static String ln;
-    public LinearLayout listsLayout;
+    int cntALL = 0;
+//    public static LinearLayout listsLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,24 +25,30 @@ public class MainActivity extends AppCompatActivity {
         
         deleteListFlg = false;
         findViewById(R.id.buttonDeleteList).setBackgroundColor(0xFFCCCCCC);
-        listsLayout = (LinearLayout) findViewById(R.id.lLayoutLists);
+        LinearLayout listsLayout = (LinearLayout) findViewById(R.id.lLayoutLists);
         listsLayout.removeAllViews();
 
-        for (Button btn : lists.keySet()) {
+        for (int i = 0; i < DisplayAddList.listNames.size(); i++) {
+            Button btn = new Button(this);
+            btn.setId(cntALL++);
+            btn.setText(DisplayAddList.listNames.get(i));
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view){
                     if (MainActivity.deleteListFlg) {
-                        lists.remove(view);
+                        int delIndex = lists.indexOf((Button) view);
+                        DisplayAddList.listNames.remove(delIndex);
+                        lists.remove(delIndex);
                         listsLayout.removeView(view);
                     } else {
                         Intent intent = new Intent(getApplicationContext(), DisplayTasks.class);
                         Button b = (Button) view;
-                        ln = b.getText().toString();
+                        MainActivity.ln = b.getText().toString();
                         startActivity(intent);
                     }
                 }
             });
-            listsLayout.addView(btn);
+            lists.add(btn);
+            listsLayout.addView(lists.get(i));
         }
     }
     public void addList(View view) {

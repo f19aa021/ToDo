@@ -12,7 +12,7 @@ import android.widget.EditText;
 import java.util.*;
 
 public class DisplayAddList extends AppCompatActivity {
-    int cntALL = 0;
+    public static ArrayList<String> listNames = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +20,9 @@ public class DisplayAddList extends AppCompatActivity {
     }
     public void createList(View view) {
         EditText editText = (EditText) findViewById(R.id.eViewListName);
-        Button btn = new Button(this);
-        btn.setId(cntALL++);
-        btn.setText(editText.getText().toString());
-        ArrayList<CheckBox> arr = new ArrayList<>();
-        MainActivity.lists.put(btn, arr);
+
+        listNames.add(editText.getText().toString());
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
