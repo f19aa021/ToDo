@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean deleteListFlg;
     public ArrayList<Button> lists = new ArrayList<>();
     public static String ln;
+    public static int selectedIndex;
     int cntALL = 0;
 //    public static LinearLayout listsLayout;
     @Override
@@ -38,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
                         int delIndex = lists.indexOf((Button) view);
                         DisplayAddList.listNames.remove(delIndex);
                         lists.remove(delIndex);
+                        DisplayAddTask.taskNames.remove(delIndex);
                         listsLayout.removeView(view);
                     } else {
                         Intent intent = new Intent(getApplicationContext(), DisplayTasks.class);
                         Button b = (Button) view;
                         MainActivity.ln = b.getText().toString();
+                        MainActivity.selectedIndex = lists.indexOf(b);
                         startActivity(intent);
                     }
                 }

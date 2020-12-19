@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DisplayAddTask extends AppCompatActivity {
     // public static final String EXTRA_MESSAGE = "com.example.todo.MESSAGE";
-    public static ArrayList<String> taskNames = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> taskNames = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,7 @@ public class DisplayAddTask extends AppCompatActivity {
     }
     public void createTask(View view) {
         EditText editText = (EditText) findViewById(R.id.eViewTaskName);
-        taskNames.add(editText.getText().toString());
+        taskNames.get(MainActivity.selectedIndex).add(editText.getText().toString());
         // intent.putExtra(EXTRA_MESSAGE, taskNames.get(0));
         Intent intent = new Intent(this, DisplayTasks.class);
         startActivity(intent);

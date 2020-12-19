@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class DisplayTasks extends AppCompatActivity {
     private float scale;
-    public ArrayList<CheckBox> checkBox = new ArrayList<>();
-    public ArrayList<LinearLayout.LayoutParams> checkBoxLayoutParams = new ArrayList<>();
+//    public ArrayList<ArrayList<CheckBox>> tasks = new ArrayList<>();
     private int checkBoxMargin[] = new int[4];
+    public LinearLayout.LayoutParams checkBoxLayoutParams;
     TextView listTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +31,22 @@ public class DisplayTasks extends AppCompatActivity {
         listTitle.setText(MainActivity.ln);
 
         checkBoxMargin[3] = (int) (32 * scale);
-        for (int i = 0; i < DisplayAddTask.taskNames.size(); i++) {
-            checkBox.add(new CheckBox(this));
-            checkBox.get(i).setText(DisplayAddTask.taskNames.get(i));
-            checkBox.get(i).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
-            checkBox.get(i).setOnClickListener(new View.OnClickListener() {
+        checkBoxLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        checkBoxLayoutParams.setMargins(checkBoxMargin[0], checkBoxMargin[1], checkBoxMargin[2], checkBoxMargin[3]);
+
+        for (int i = 0; i < DisplayAddTask.taskNames.get(MainActivity.selectedIndex).size(); i++) {
+            CheckBox cBox = new CheckBox(this);
+            cBox.setText(DisplayAddTask.taskNames.get(MainActivity.selectedIndex).get(i));
+            cBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+            cBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     toArchive(view);
                 }
             });
-            checkBoxLayoutParams.add(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            checkBoxLayoutParams.get(i).setMargins(checkBoxMargin[0], checkBoxMargin[1], checkBoxMargin[2], checkBoxMargin[3]);
-            checkBox.get(i).setLayoutParams(checkBoxLayoutParams.get(i));
-            tasksLayout.addView(checkBox.get(i));
+            cBox.setLayoutParams(checkBoxLayoutParams);
+            tasksLayout.addView(cBox);
         }
     }
     public void toArchive(View view) {
